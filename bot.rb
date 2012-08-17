@@ -25,7 +25,7 @@ Cinch::Bot.new do
     end
 
     on :message, /^>>(.+)/ do |m, query|
-        Open3.popen3("sudo", "-u", "jrajav", "ruby", "-e", runner_script, resource_limits) do |i, o, e, t|
+        Open3.popen3("sudo", "-u", "jrajav", "ruby", "-E", "binary:binary", "-e", runner_script, resource_limits) do |i, o, e, t|
             i.print query
             i.close
             stdout = o.read
