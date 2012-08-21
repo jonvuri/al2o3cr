@@ -1,5 +1,6 @@
 require 'cinch'
 require 'open3'
+require 'timeout'
 
 def smush(text, length)
     array_len = (length / 3).ceil
@@ -25,7 +26,7 @@ Cinch::Bot.new do
     end
 
     on :message, /^>>(.+)/ do |m, query|
-        Open3.popen3("sudo", "-u", "jrajav", "ruby", "-E", "binary:binary", "-e", runner_script, resource_limits) do |i, o, e, t|
+        Open3.popen3("timeout", "2", "sudo", "-u", "jrajav", "ruby", "-E", "binary:binary", "-e", runner_script, resource_limits) do |i, o, e, t|
             i.print query
             i.close
             stdout = o.read
