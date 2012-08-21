@@ -40,4 +40,12 @@ Cinch::Bot.new do
             end
         end
     end
+
+    on :message, /^!(panic|zomg|dammit|apocalypse|reset)/ do |m, query|
+        panic = ["AAAAAAAH", "PANIC", "HOLY HELL", "AAAAUUUUGH", "SWEET ZOMBIE JESUS", "NOOOOOOO", "SAVE YOURSELF"]
+        phew = ["All better", "Phew!", "Crisis averted", "Still alive~"]
+        m.reply panic.sample
+        Process.spawn "pkill -u jrajav"
+        m.reply phew.sample
+    end
 end.start
